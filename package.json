@@ -34,6 +34,7 @@
     "dotenv": "^17.2.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
+    "git-commit-msg-linter": "^5.0.8",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "postcss": "^8",
