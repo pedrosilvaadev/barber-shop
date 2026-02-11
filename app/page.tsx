@@ -8,6 +8,7 @@ import Image from "next/image"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { db } from "@/lib/prisma"
 import BarberShopItem from "@/components/barbershopitem"
+import { quickSearchOptions } from "./_constants/search"
 
 export default async function Home() {
   const barbershops = await db.barbershop.findMany({})
@@ -32,52 +33,17 @@ export default async function Home() {
         </div>
 
         <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
-          <Button className="gap-2" variant={"secondary"}>
-            <Image
-              src="icons/scissors.svg"
-              alt="Tesoura"
-              width={16}
-              height={16}
-            />
-            Cabelo
-          </Button>
-
-          <Button className="gap-2" variant={"secondary"}>
-            <Image
-              src="icons/mustache.svg"
-              alt="Creme de barba"
-              width={16}
-              height={16}
-            />
-            Barba
-          </Button>
-          <Button className="gap-2" variant={"secondary"}>
-            <Image src="icons/razor.svg" alt="Tesoura" width={16} height={16} />
-            Acabamento
-          </Button>
-          <Button className="gap-2" variant={"secondary"}>
-            <Image
-              src="icons/scissors.svg"
-              alt="Tesoura"
-              width={16}
-              height={16}
-            />
-            Cabelo
-          </Button>
-
-          <Button className="gap-2" variant={"secondary"}>
-            <Image
-              src="icons/mustache.svg"
-              alt="Creme de barba"
-              width={16}
-              height={16}
-            />
-            Barba
-          </Button>
-          <Button className="gap-2" variant={"secondary"}>
-            <Image src="icons/razor.svg" alt="Tesoura" width={16} height={16} />
-            Acabamento
-          </Button>
+          {quickSearchOptions.map((option) => (
+            <Button key={option.title} className="gap-2" variant={"secondary"}>
+              <Image
+                src={option.imageUrl}
+                alt={option.title}
+                width={16}
+                height={16}
+              />
+              {option.title}
+            </Button>
+          ))}
         </div>
 
         <div className="relative mt-6 h-[180px] w-full">
