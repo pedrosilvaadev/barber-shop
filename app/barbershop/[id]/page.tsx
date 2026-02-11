@@ -1,8 +1,9 @@
 import PhoneItem from "@/components/phone-item"
 import ServiceItem from "@/components/service-item"
+import SideBarButton from "@/components/sidebar-button"
 import { Button } from "@/components/ui/button"
 import { db } from "@/lib/prisma"
-import { ChevronLeftIcon, MapPinIcon, MenuIcon, StarIcon } from "lucide-react"
+import { ChevronLeftIcon, MapPinIcon, StarIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -27,32 +28,26 @@ const BarberShopPage = async ({ params }: BarberShopPageProps) => {
   }
 
   return (
-    <div>
-      <div className="relative h-[250px] w-full">
-        <Image
-          src={barberShop?.imageUrl}
-          alt={barberShop?.name}
-          fill
-          className="object-cover"
-        />
-        <Button
-          size="icon"
-          variant={"secondary"}
-          className="absolute left-4 top-4"
-          asChild
-        >
-          <Link href="/">
-            <ChevronLeftIcon />
-          </Link>
-        </Button>
+    <div className="relative h-[250px] w-full">
+      <Image
+        src={barberShop?.imageUrl}
+        alt={barberShop?.name}
+        fill
+        className="object-cover"
+      />
+      <Button
+        size="icon"
+        variant={"secondary"}
+        className="absolute left-4 top-4"
+        asChild
+      >
+        <Link href="/">
+          <ChevronLeftIcon />
+        </Link>
+      </Button>
 
-        <Button
-          size="icon"
-          variant={"secondary"}
-          className="absolute right-4 top-4"
-        >
-          <MenuIcon />
-        </Button>
+      <div className="absolute right-4 top-4">
+        <SideBarButton />
       </div>
 
       <div className="border-b border-solid p-5">
