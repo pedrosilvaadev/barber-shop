@@ -1,5 +1,11 @@
 import { quickSearchOptions } from "@/app/_constants/search"
-import { MenuIcon, HomeIcon, CalendarIcon, LogOutIcon } from "lucide-react"
+import {
+  MenuIcon,
+  HomeIcon,
+  CalendarIcon,
+  LogOutIcon,
+  LogInIcon,
+} from "lucide-react"
 import { Button } from "./ui/button"
 import {
   SheetTrigger,
@@ -11,7 +17,14 @@ import {
 } from "./ui/sheet"
 import Image from "next/image"
 import Link from "next/link"
-import { Avatar, AvatarImage } from "./ui/avatar"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog"
 
 const SideBarButton = () => {
   return (
@@ -27,8 +40,35 @@ const SideBarButton = () => {
           <SheetTitle className="text-left">Menu</SheetTitle>
         </SheetHeader>
 
-        <div className="flex items-center gap-3 border-b border-solid p-5">
-          <Avatar>
+        <div className="flex items-center justify-between gap-3 border-b border-solid p-5">
+          <h2 className="text-lg font-bold">Olá faça seu login</h2>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="icon">
+                <LogInIcon />
+              </Button>
+            </DialogTrigger>
+
+            <DialogContent className="w-[90%]">
+              <DialogHeader>
+                <DialogTitle>Faça login na plataforma</DialogTitle>
+                <DialogDescription>
+                  Conecte-se usando sua conta Google
+                </DialogDescription>
+              </DialogHeader>
+
+              <Button variant={"outline"} className="gap-2">
+                <Image
+                  src="/icons/google.svg"
+                  alt="Google Icon"
+                  width={18}
+                  height={18}
+                />
+                Google
+              </Button>
+            </DialogContent>
+          </Dialog>
+          {/* <Avatar>
             <AvatarImage
               src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?q=80&w=1085&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Pedro"
@@ -37,7 +77,7 @@ const SideBarButton = () => {
           <div>
             <p className="font-bold">Pedro Silva</p>
             <p className="text-xs">pedro@teste.com</p>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex flex-col gap-4 border-b border-solid py-5">
