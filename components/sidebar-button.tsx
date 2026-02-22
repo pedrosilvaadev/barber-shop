@@ -1,3 +1,4 @@
+"use client"
 import { quickSearchOptions } from "@/app/_constants/search"
 import {
   MenuIcon,
@@ -25,8 +26,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog"
+import { signIn, signOut, useSession } from "next-auth/react"
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 
 const SideBarButton = () => {
+  const { data: session } = useSession()
+  const handleLoginWithGoogle = () => signIn("google")
+  const handleLogout = () => signOut()
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -41,43 +48,60 @@ const SideBarButton = () => {
         </SheetHeader>
 
         <div className="flex items-center justify-between gap-3 border-b border-solid p-5">
-          <h2 className="text-lg font-bold">Olá faça seu login</h2>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button size="icon">
-                <LogInIcon />
-              </Button>
-            </DialogTrigger>
-
-            <DialogContent className="w-[90%]">
-              <DialogHeader>
-                <DialogTitle>Faça login na plataforma</DialogTitle>
-                <DialogDescription>
-                  Conecte-se usando sua conta Google
-                </DialogDescription>
-              </DialogHeader>
-
-              <Button variant={"outline"} className="gap-2">
-                <Image
-                  src="/icons/google.svg"
-                  alt="Google Icon"
-                  width={18}
-                  height={18}
+          {session?.user ? (
+            <div className="flex items-center gap-3">
+              <Avatar>
+                <AvatarImage
+                  src={session?.user.image || ""}
+                  alt="User Avatar"
                 />
-                Google
-              </Button>
-            </DialogContent>
-          </Dialog>
-          {/* <Avatar>
-            <AvatarImage
-              src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?q=80&w=1085&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="Pedro"
-            />
-          </Avatar>
-          <div>
-            <p className="font-bold">Pedro Silva</p>
-            <p className="text-xs">pedro@teste.com</p>
-          </div> */}
+                <AvatarFallback>
+                  {session.user.name
+                    ?.split(" ")
+                    .map((n) => n[0])
+                    .join("")}
+                </AvatarFallback>
+              </Avatar>
+              <div>
+                <p className="font-bold">{session.user.name}</p>
+                <p className="text-xs">{session.user.email}</p>
+              </div>
+            </div>
+          ) : (
+            <>
+              <h2 className="text-lg font-bold">Olá faça seu login</h2>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button size="icon">
+                    <LogInIcon />
+                  </Button>
+                </DialogTrigger>
+
+                <DialogContent className="w-[90%]">
+                  <DialogHeader>
+                    <DialogTitle>Faça login na plataforma</DialogTitle>
+                    <DialogDescription>
+                      Conecte-se usando sua conta Google
+                    </DialogDescription>
+                  </DialogHeader>
+
+                  <Button
+                    variant={"outline"}
+                    className="gap-2"
+                    onClick={handleLoginWithGoogle}
+                  >
+                    <Image
+                      src="/icons/google.svg"
+                      alt="Google Icon"
+                      width={18}
+                      height={18}
+                    />
+                    Google
+                  </Button>
+                </DialogContent>
+              </Dialog>
+            </>
+          )}
         </div>
 
         <div className="flex flex-col gap-4 border-b border-solid py-5">
@@ -113,7 +137,11 @@ const SideBarButton = () => {
           ))}
         </div>
 
-        <Button className="mt-5 justify-start gap-2" variant={"ghost"}>
+        <Button
+          className="mt-5 justify-start gap-2"
+          variant={"ghost"}
+          onClick={handleLogout}
+        >
           <LogOutIcon size={18} />
           Sair da conta
         </Button>
