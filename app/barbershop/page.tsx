@@ -11,10 +11,24 @@ interface BarbershopPageProps {
 const BarbershopsPage = async ({ searchParams }: BarbershopPageProps) => {
   const barbershops = await db.barbershop.findMany({
     where: {
-      name: {
-        contains: searchParams?.search,
-        mode: "insensitive",
-      },
+      OR: [
+        {
+          name: {
+            contains: searchParams?.search,
+            mode: "insensitive",
+          },
+        },
+        {
+          services: {
+            some: {
+              name: {
+                contains: searchParams?.search,
+                mode: "insensitive",
+              },
+            },
+          },
+        },
+      ],
     },
   })
 
@@ -28,7 +42,7 @@ const BarbershopsPage = async ({ searchParams }: BarbershopPageProps) => {
         <h2 className="text-bold mb-3 mt-6 text-xs uppercase text-gray-400">
           Resultados para: {searchParams?.search}
         </h2>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="mb-6 grid grid-cols-2 gap-4">
           {barbershops.map((barbershop) => (
             <BarberShopItem key={barbershop.id} barbershop={barbershop} />
           ))}
