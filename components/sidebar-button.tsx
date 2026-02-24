@@ -114,14 +114,16 @@ const SideBarButton = () => {
           ))}
         </div>
 
-        <Button
-          className="mt-5 justify-start gap-2"
-          variant={"ghost"}
-          onClick={handleLogout}
-        >
-          <LogOutIcon size={18} />
-          Sair da conta
-        </Button>
+        {session?.user && (
+          <Button
+            className="mt-5 justify-start gap-2"
+            variant={"ghost"}
+            onClick={handleLogout}
+          >
+            <LogOutIcon size={18} />
+            Sair da conta
+          </Button>
+        )}
       </SheetContent>
     </Sheet>
   )
