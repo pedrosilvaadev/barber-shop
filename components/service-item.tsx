@@ -36,15 +36,17 @@ const TIME_LIST = [
 const getTimeList = (bookings: Booking[]) => {
   const timeList = TIME_LIST.filter((time) => {
     const [hour, minute] = time.split(":").map(Number)
-    if (
-      bookings.some((booking) => {
-        const bookingHour = booking.date.getHours()
-        const bookingMinute = booking.date.getMinutes()
-        return bookingHour === hour && bookingMinute === minute
-      })
-    ) {
+
+    const hasBookingInThisTime = bookings.some((booking) => {
+      const bookingHour = booking.date.getHours()
+      const bookingMinute = booking.date.getMinutes()
+      return bookingHour === hour && bookingMinute === minute
+    })
+
+    if (hasBookingInThisTime) {
       return false
     }
+
     return true
   })
 
