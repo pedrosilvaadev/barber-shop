@@ -1,4 +1,9 @@
 # Barber Schedule
+<img width="1684" height="945" alt="image" src="https://github.com/user-attachments/assets/c4af61a3-6e7c-4b89-80e0-7d00ed3e52f9" />
+<img width="1678" height="928" alt="image" src="https://github.com/user-attachments/assets/a059fdfd-5587-4b98-affb-28e71cf755bd" />
+<img width="1523" height="906" alt="image" src="https://github.com/user-attachments/assets/d371d958-6fd9-48b7-9ef3-cf9be948849c" />
+
+
 
 A modern web application for booking barber services. Users can browse barbershops, view available services, and schedule appointments seamlessly.
 
