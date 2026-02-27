@@ -26,7 +26,7 @@ export default async function Home() {
   return (
     <div>
       <Header />
-      <div className="p-5">
+      <div className="container mx-auto p-5">
         <h2 className="text-xl font-bold">
           Olá,{session?.user ? session.user.name : "bem-vindo"}!
         </h2>
@@ -60,7 +60,7 @@ export default async function Home() {
           ))}
         </div>
 
-        <div className="relative mt-6 h-[180px] w-full">
+        <div className="relative mt-6 h-[180px] w-full md:h-[320px]">
           <Image
             src="/images/banner-01.svg"
             alt="Agende nos melhores com FSW Barber"

@@ -10,7 +10,7 @@ const BookingsPage = async () => {
   return (
     <>
       <Header />
-      <div className="space-y-3 p-5">
+      <div className="container mx-auto space-y-3 p-5">
         <div>
           <h1 className="text-xl font-bold">Agendamentos</h1>
           <p className="text-sm text-gray-400">

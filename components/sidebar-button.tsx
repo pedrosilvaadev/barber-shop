@@ -32,8 +32,8 @@ const SideBarButton = () => {
   const [openLoginDialog, setOpenLoginDialog] = useState(false)
 
   const handleLogout = () => {
-    router.push("/")
     signOut()
+    router.push("/")
   }
 
   const handleNavigateBookings = () => {

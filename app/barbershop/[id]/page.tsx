@@ -19,26 +19,28 @@ const BarberShopPage = async ({ params }: BarberShopDetailProps) => {
   }
 
   return (
-    <div className="relative h-[250px] w-full">
-      <Image
-        src={barberShop?.imageUrl}
-        alt={barberShop?.name}
-        fill
-        className="object-cover"
-      />
-      <Button
-        size="icon"
-        variant={"secondary"}
-        className="absolute left-4 top-4"
-        asChild
-      >
-        <Link href="/">
-          <ChevronLeftIcon />
-        </Link>
-      </Button>
+    <div className="container mx-auto">
+      <div className="relative h-[250px] w-full">
+        <Image
+          src={barberShop?.imageUrl}
+          alt={barberShop?.name}
+          fill
+          className="object-cover"
+        />
+        <Button
+          size="icon"
+          variant={"secondary"}
+          className="absolute left-4 top-4"
+          asChild
+        >
+          <Link href="/">
+            <ChevronLeftIcon />
+          </Link>
+        </Button>
 
-      <div className="absolute right-4 top-4">
-        <SideBarButton />
+        <div className="absolute right-4 top-4">
+          <SideBarButton />
+        </div>
       </div>
 
       <div className="border-b border-solid p-5">
@@ -65,7 +67,7 @@ const BarberShopPage = async ({ params }: BarberShopDetailProps) => {
 
       <div className="space-y-3 border-b border-solid p-5">
         <h2 className="text-xs font-bold uppercase text-gray-400">Serviços</h2>
-        <div className="space-y-3">
+        <div className="space-y-3 md:grid md:grid-cols-2 md:gap-3 md:space-y-0 lg:grid-cols-3">
           {barberShop?.services.map((service) => (
             <ServiceItem
               key={service.id}
