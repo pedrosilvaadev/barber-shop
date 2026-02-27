@@ -23,10 +23,27 @@ import { signOut, useSession } from "next-auth/react"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import SignInDialog from "./sign-in-dialog"
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 const SideBarButton = () => {
   const { data: session } = useSession()
-  const handleLogout = () => signOut()
+  const router = useRouter()
+  const [openLoginDialog, setOpenLoginDialog] = useState(false)
+
+  const handleLogout = () => {
+    router.push("/")
+    signOut()
+  }
+
+  const handleNavigateBookings = () => {
+    if (!session?.user) {
+      setOpenLoginDialog(true)
+      return
+    }
+
+    router.push("/bookings")
+  }
 
   return (
     <Sheet>
@@ -88,12 +105,19 @@ const SideBarButton = () => {
               </Link>
             </Button>
           </SheetClose>
-          <Button className="justify-start gap-1" variant={"ghost"} asChild>
-            <Link href="/bookings">
+          <Dialog open={openLoginDialog} onOpenChange={setOpenLoginDialog}>
+            <Button
+              className="justify-start gap-1"
+              variant={"ghost"}
+              onClick={handleNavigateBookings}
+            >
               <CalendarIcon size={18} />
               Agendamentos
-            </Link>
-          </Button>
+            </Button>
+            <DialogContent className="w-[90%]">
+              <SignInDialog />
+            </DialogContent>
+          </Dialog>
         </div>
 
         <div className="flex flex-col gap-4 border-b border-solid py-5">
